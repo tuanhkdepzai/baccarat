@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZENTROX AI 6.0 - Trang Chủ</title>
+    <link rel="stylesheet" href="https://www.toolmd5.net/vuexy5.4/app-assets/vendors/css/extensions/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://www.toolmd5.net/vuexy5.4/app-assets/css/plugins/forms/validation/form-validation.css">
+    <link rel="stylesheet" href="https://www.toolmd5.net/md5/css/715c469e7d11555c.css" data-precedence="next">
+    <link rel="stylesheet" href="https://www.toolmd5.net/vuexy5.4/assets/css/style.css?v=1212">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('nen.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.8;
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .logo-text {
+            color: #ffd700;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .user-info h3 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .user-info p {
+            color: #ffd700;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .main-content {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .welcome-title {
+            color: #ffd700;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .welcome-subtitle {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .game-card {
+            background: rgba(128, 128, 128, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 2px solid #666;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            box-shadow: 0 8px 32px rgba(128, 128, 128, 0.1);
+        }
+
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(128, 128, 128, 0.2);
+            border-color: #999;
+        }
+
+        .game-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: rgba(128, 128, 128, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 8px 32px rgba(128, 128, 128, 0.2);
+        }
+
+        .game-title {
+            color: #ffd700;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-description {
+            color: white;
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .contact-icons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-icon:hover {
+            transform: scale(1.1);
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .contact-icon img {
+            width: 30px;
+            height: 30px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: row;
+                gap: 10px;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 0;
+            }
+
+            .logo {
+                gap: 8px;
+            }
+
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .user-profile {
+                padding: 8px 12px;
+                gap: 8px;
+            }
+
+            .user-avatar {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            .user-info h3 {
+                font-size: 0.9rem;
+            }
+
+            .user-info p {
+                font-size: 0.7rem;
+            }
+
+            .logout-btn {
+                padding: 6px 10px;
+                font-size: 0.7rem;
+            }
+
+            .welcome-title {
+                font-size: 2rem;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .game-card {
+                padding: 30px 20px;
+            }
+        }
+
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 215, 0, 0.6);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes rotate-border {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="background-container"></div>
+
+    <!-- Floating particles -->
+    <div class="floating-particles" id="particles"></div>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                </div>
+                <div class="logo-text">ZENTROX AI 6.0</div>
+            </div>
+            
+            <div class="user-profile">
+                <div class="user-avatar" id="userAvatar">
+                    U
+                </div>
+                <div class="user-info">
+                    <h3 id="userName">Người dùng</h3>
+                    <p>Thành viên VIP</p>
+                </div>
+                <button class="logout-btn" onclick="logout()">Đăng xuất</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <h1 class="welcome-title">Chào mừng đến với ZENTROX AI 6.0</h1>
+            <p class="welcome-subtitle">Dự đoán chính xác, thống kê thông minh - Lựa chọn game yêu thích của bạn</p>
+            
+            <div class="games-grid">
+                <div class="game-card" onclick="playGame('baccarat')">
+                    <div class="game-icon">
+                        <!-- Icon Baccarat: Lá bài + Chip -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 100 100">
+                            <!-- Lá bài -->
+                            <rect x="20" y="10" width="35" height="50" rx="3" ry="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <rect x="25" y="15" width="25" height="40" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1"/>
+                            <!-- Ký hiệu trên lá bài -->
+                            <text x="37" y="30" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="currentColor">A</text>
+                            <text x="37" y="45" font-family="Arial" font-size="8" text-anchor="middle" fill="currentColor">♠</text>
+                            <text x="30" y="25" font-family="Arial" font-size="6" fill="currentColor">♠</text>
+                            <text x="44" y="50" font-family="Arial" font-size="6" fill="currentColor" transform="rotate(180 44 50)">♠</text>
+                            
+                            <!-- Chip xanh -->
+                            <circle cx="65" cy="35" r="15" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="65" cy="35" r="10" fill="none" stroke="currentColor" stroke-width="1"/>
+                            <text x="65" y="40" font-family="Arial" font-size="10" font-weight="bold" text-anchor="middle" fill="currentColor">$</text>
+                            
+                            <!-- Chip đỏ -->
+                            <circle cx="70" cy="60" r="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="70" cy="60" r="8" fill="none" stroke="currentColor" stroke-width="1"/>
+                            <text x="70" y="65" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle" fill="currentColor">100</text>
+                        </svg>
+                    </div>
+                    <h2 class="game-title">BACCARAT</h2>
+                    <p class="game-description">
+                        Dự đoán kết quả Baccarat với độ chính xác cao. 
+                        Phân tích thống kê thông minh giúp bạn đưa ra quyết định tốt nhất.
+                    </p>
+                </div>
+
+                <div class="game-card" onclick="playGame('slots')">
+                    <div class="game-icon">
+                        <!-- Icon Nổ Hũ: Máy đánh bạc -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 100 100">
+                            <!-- Thân máy -->
+                            <rect x="15" y="25" width="70" height="50" rx="8" ry="8" fill="none" stroke="currentColor" stroke-width="2"/>
+                            
+                            <!-- Màn hình hiển thị -->
+                            <rect x="25" y="35" width="50" height="20" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1"/>
+                            
+                            <!-- 3 cửa sổ slot -->
+                            <rect x="28" y="38" width="8" height="14" fill="none" stroke="currentColor" stroke-width="1"/>
+                            <rect x="46" y="38" width="8" height="14" fill="none" stroke="currentColor" stroke-width="1"/>
+                            <rect x="64" y="38" width="8" height="14" fill="none" stroke="currentColor" stroke-width="1"/>
+                            
+                            <!-- Biểu tượng trong slot -->
+                            <text x="32" y="47" font-family="Arial" font-size="6" text-anchor="middle" fill="currentColor">7</text>
+                            <text x="50" y="47" font-family="Arial" font-size="6" text-anchor="middle" fill="currentColor">7</text>
+                            <text x="68" y="47" font-family="Arial" font-size="6" text-anchor="middle" fill="currentColor">7</text>
+                            
+                            <!-- Nút bấm -->
+                            <circle cx="35" cy="70" r="4" fill="none" stroke="currentColor" stroke-width="1"/>
+                            <circle cx="50" cy="70" r="4" fill="none" stroke="currentColor" stroke-width="1"/>
+                            <circle cx="65" cy="70" r="4" fill="none" stroke="currentColor" stroke-width="1"/>
+                            
+                            <!-- Đèn LED -->
+                            <circle cx="85" cy="30" r="2" fill="none" stroke="currentColor" stroke-width="1"/>
+                            <circle cx="85" cy="35" r="2" fill="none" stroke="currentColor" stroke-width="1"/>
+                            <circle cx="85" cy="40" r="2" fill="none" stroke="currentColor" stroke-width="1"/>
+                            
+                            <!-- Tiền xu rơi -->
+                            <circle cx="80" cy="65" r="3" fill="none" stroke="currentColor" stroke-width="1"/>
+                            <circle cx="82" cy="68" r="2" fill="none" stroke="currentColor" stroke-width="1"/>
+                            <circle cx="78" cy="70" r="2.5" fill="none" stroke="currentColor" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <h2 class="game-title">NỔ HŨ</h2>
+                    <p class="game-description">
+                        Trải nghiệm game Nổ Hũ với tỷ lệ thắng cao. 
+                        Thuật toán AI tiên tiến dự đoán chu kỳ nổ hũ chính xác.
+                    </p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <!-- Contact icons -->
+    <div class="contact-icons">
+        <a href="https://t.me/hknamvip" target="_blank" class="contact-icon">
+            <img src="md5/images/telegram-icon.png" alt="Telegram">
+        </a>
+        <a href="https://zaloapp.com/qr/p/1p0cl6uulq65" target="_blank" class="contact-icon">
+            <img src="md5/images/zalo.png" alt="Zalo">
+        </a>
+    </div>
+
+    <script src="https://www.toolmd5.net/vuexy5.4/app-assets/vendors/js/vendors.min.js"></script>
+    <script src="https://www.toolmd5.net/vuexy5.4/app-assets/vendors/js/extensions/sweetalert2.all.min.js"></script>
+    <script src="https://www.toolmd5.net/vuexy5.4/app-assets/vendors/js/extensions/polyfill.min.js"></script>
+    <script src="https://www.toolmd5.net/vuexy5.4/app-assets/js/core/app-menu.js"></script>
+    <script src="https://www.toolmd5.net/vuexy5.4/app-assets/js/core/app.js"></script>
+    <script src="https://www.toolmd5.net/vuexy5.4/app-assets/js/scripts/components.js"></script>
+    <script src="https://www.toolmd5.net/js/ajax.js"></script>
+    
+    <script>
+        // Tạo hiệu ứng particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 4 + 2;
+                const x = Math.random() * window.innerWidth;
+                const delay = Math.random() * 6;
+                
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = x + 'px';
+                particle.style.top = '100vh';
+                particle.style.animationDelay = delay + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Lấy thông tin user từ localStorage hoặc session
+        function loadUserInfo() {
+            const userName = localStorage.getItem('userName') || 'Người dùng';
+            const userAvatar = userName.charAt(0).toUpperCase();
+            
+            document.getElementById('userName').textContent = userName;
+            document.getElementById('userAvatar').textContent = userAvatar;
+        }
+
+        // Hiệu ứng countdown với SweetAlert2
+        function showCountdown(gameType) {
+            let timerInterval;
+            
+            Swal.fire({
+                title: 'Đang tải dữ liệu trò chơi',
+                html: 'Load <b></b> Data.',
+                timer: 4000,
+                timerProgressBar: true,
+                onBeforeOpen: () => {
+                    Swal.showLoading();
+                    timerInterval = setInterval(() => {
+                        const content = Swal.getContent();
+                        if (content) {
+                            const b = content.querySelector('b');
+                            if (b) b.textContent = Swal.getTimerLeft();
+                        }
+                    }, 100);
+                },
+                onClose: () => clearInterval(timerInterval)
+            }).then(result => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    // Chuyển hướng sau khi countdown xong
+                    if (gameType === 'baccarat') {
+                        window.location.href = 'baccarat.html';
+                    } else if (gameType === 'slots') {
+                        window.location.href = '/slots';
+                    }
+                }
+            });
+        }
+
+        // Xử lý chọn game
+        function playGame(gameType) {
+            showCountdown(gameType);
+        }
+
+        // Đăng xuất
+        function logout() {
+            Swal.fire({
+                title: 'Đăng xuất',
+                text: 'Bạn có chắc chắn muốn đăng xuất?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#ffd700',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Đăng xuất',
+                cancelButtonText: 'Hủy'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    localStorage.removeItem('userName');
+                    window.location.href = '/login';
+                }
+            });
+        }
+
+        // Khởi tạo trang
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            loadUserInfo();
+            
+            // Thêm hiệu ứng hover cho các game card
+            const gameCards = document.querySelectorAll('.game-card');
+            gameCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
